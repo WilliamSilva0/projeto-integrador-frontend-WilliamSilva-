@@ -6,35 +6,91 @@
     <title>Burguer Pro</title>
 </head>
 <body>
-    <h1>Burguer Pro</h1>
-    <p>Cardápio digital com os melhores lanches artesanais da cidade.</p>
 
-    <ul>
-        <li>Lanches</li>
-        <li>Bebidas</li>
-        <li>Sobremesas</li>
-    </ul>
+    <header>
+        <h1>Burguer Pro</h1>
+        <p>Cardápio digital com os melhores lanches artesanais da cidade.</p>
+    </header>
 
-    <table>
-        <tr>
-            <th>Item</th>
-            <th>Preço</th>
-        </tr>
-        <tr>
-            <td>X-Burguer Especial</td>
-            <td>R$ 25,90</td>
-        </tr>
-        <tr>
-            <td>Batata Frita</td>
-            <td>R$ 12,00</td>
-        </tr>
-    </table>
+    <main>
+        <section>
+            <h2>Cardápio</h2>
+            <ul>
+                <li>Lanches</li>
+                <li>Bebidas</li>
+                <li>Sobremesas</li>
+            </ul>
 
-    <a href="https://pt.wikipedia.org/wiki/Hamb%C3%BArguer" target="_blank" rel="noopener noreferrer">
-        Saiba mais sobre a história do hambúrguer
-    </a>
+            <table>
+                <tr>
+                    <th>Item</th>
+                    <th>Preço</th>
+                </tr>
+                <tr>
+                    <td>X-Burguer Especial</td>
+                    <td>R$ 25,90</td>
+                </tr>
+                <tr>
+                    <td>Batata Frita</td>
+                    <td>R$ 12,00</td>
+                </tr>
+            </table>
 
-    <img src="assets/images/hamburguer.jpg" alt="Hambúrguer artesanal com queijo, alface e tomate">
+            <a href="https://pt.wikipedia.org/wiki/Hamb%C3%BArguer" target="_blank" rel="noopener noreferrer">
+                Saiba mais sobre a história do hambúrguer
+            </a>
+
+            <img src="assets/images/hamburguer.jpg" alt="Hambúrguer artesanal com queijo, alface e tomate">
+        </section>
+
+        <section>
+            <h2>Reserve sua mesa</h2>
+            <form>
+                <fieldset>
+                    <legend>Dados da reserva</legend>
+
+                    <label for="nome">Nome completo</label>
+                    <input type="text" id="nome" name="nome" required><br><br>
+
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" required><br><br>
+
+                    <label for="data">Data da reserva</label>
+                    <input type="date" id="data" name="data"><br><br>
+
+                    <label for="horario">Horário</label>
+                    <input type="time" id="horario" name="horario"><br><br>
+
+                    <label for="pessoas">Número de pessoas</label>
+                    <input type="number" id="pessoas" name="pessoas" min="1" max="20"><br><br>
+
+                    <label for="mesa">Tipo de mesa</label>
+                    <select id="mesa" name="mesa">
+                        <option value="interna">Interna</option>
+                        <option value="externa">Externa</option>
+                        <option value="varanda">Varanda</option>
+                        <option value="salao-vip">Salão VIP</option>
+                    </select><br><br>
+
+                    <p>Ocasião:</p>
+                    <input type="radio" id="ocasiao-normal" name="ocasiao" value="normal">
+                    <label for="ocasiao-normal">Normal</label><br>
+
+                    <input type="radio" id="ocasiao-aniversario" name="ocasiao" value="aniversario">
+                    <label for="ocasiao-aniversario">Aniversário</label><br>
+
+                    <input type="radio" id="ocasiao-comemoracao" name="ocasiao" value="comemoracao">
+                    <label for="ocasiao-comemoracao">Comemoração</label><br><br>
+
+                    <button type="submit">Confirmar reserva</button>
+                </fieldset>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Burguer Pro. Todos os direitos reservados.</p>
+    </footer>
 
 </body>
 </html>
