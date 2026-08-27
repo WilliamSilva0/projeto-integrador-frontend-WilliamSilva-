@@ -73,3 +73,14 @@ footer {
     border-top: 1px solid #ddd;
     color: #777;
 }
+.foto-cardapio {
+    max-width: 400px;
+    width: 100%;
+    display: block;
+}
+
+.video-cardapio {
+    max-width: 400px;
+    width: 100%;
+    display: block;
+}
