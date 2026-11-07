@@ -1,86 +1,120 @@
-body {
-    font-family: Arial, sans-serif;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    color: #333;
+/* ===== Variáveis (Aula 6) ===== */
+:root {
+  --cor-primaria: #d35400;
+  --cor-primaria-escura: #a04000;
+  --cor-acento: #f39c12;
+  --cor-acento-claro: #fdebd0;
+  --cor-texto: #2c2c2c;
+  --cor-texto-suave: #666;
+  --cor-fundo: #faf6f1;
+  --cor-card: #ffffff;
+  --raio: 12px;
+  --sombra: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --transicao-padrao: transform 0.2s ease;
 }
 
-header {
-    text-align: center;
-    border-bottom: 3px solid #d35400;
-    padding-bottom: 15px;
-    margin-bottom: 20px;
+/* Erro 3 da Aula 6 evitado: tipografia em rem (respeita a fonte escolhida pelo usuário); px só em bordas/sombras */
+html { font-size: 100%; }
+body { font-family: Arial, sans-serif; background: var(--cor-fundo); color: var(--cor-texto); line-height: 1.6; }
+
+/* ===== Navbar (Aula 8) =====
+   Sticky: a navbar é filha direta do <body> de propósito. Dentro do <header> ela só grudaria
+   até o fim dele (sticky-constraint rectangle). Nenhum ancestral tem overflow, então funciona.
+   z-index no ELEMENTO QUE CRIA o contexto (.navbar), não só no dropdown (Erro 1 da Aula 8). */
+.navbar { position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.5rem; background: var(--cor-card); box-shadow: var(--sombra); }
+.logo { font-weight: 700; font-size: 1.25rem; color: var(--cor-primaria); text-decoration: none; }
+.menu { display: flex; gap: 1.5rem; list-style: none; }
+.menu a { color: var(--cor-texto); text-decoration: none; padding: 0.5rem 0; transition: color 0.2s; }
+.menu a:hover, .menu a:focus-visible { color: var(--cor-primaria); }
+.menu a.ativo { color: var(--cor-primaria); border-bottom: 2px solid var(--cor-primaria); }
+
+/* Dropdown: o <li> pai tem position: relative (Erro 2) e o dropdown encosta nele em top: 100%, sem "buraco" de hover (Erro 4) */
+.tem-dropdown { position: relative; }
+.dropdown { display: none; position: absolute; top: 100%; left: 0; min-width: 10rem; padding: 0.5rem 0; list-style: none; background: var(--cor-card); box-shadow: var(--sombra); border-radius: 0 0 8px 8px; }
+.dropdown a { display: block; padding: 0.4rem 1rem; }
+.tem-dropdown:hover .dropdown, .tem-dropdown:focus-within .dropdown { display: block; }
+
+.menu-hamburguer { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; }
+.menu-hamburguer .barra { width: 24px; height: 3px; background: var(--cor-texto); }
+@media (max-width: 640px) {
+  .menu-hamburguer { display: flex; }
+  .menu { display: none; }
+  .menu.aberto { display: flex; flex-direction: column; gap: 0.5rem; position: absolute; top: 100%; left: 0; right: 0; padding: 1rem 1.5rem; background: var(--cor-card); box-shadow: var(--sombra); }
+  .dropdown { position: static; box-shadow: none; }
 }
 
-h1 {
-    color: #d35400;
-}
+/* ===== Cabeçalho e layout geral (Aulas 6 e 7) ===== */
 
-table {
-    border-collapse: collapse;
-    width: 100%;
-    margin: 20px 0;
+/* Grid com áreas nomeadas (Aula 7) */
+main { max-width: 1000px; margin: 0 auto; padding: 2.5rem 1rem 0; display: grid; gap: 1.5rem; grid-template-columns: 1fr 1fr;
+  grid-template-areas: "cardapio cardapio" "midia graficos" "reserva reserva"; }
+main > section { min-width: 0; background: var(--cor-card); border-radius: var(--raio); box-shadow: var(--sombra); padding: 1.5rem 2rem; }
+#cardapio { grid-area: cardapio; }
+#midia { grid-area: midia; }
+#graficos { grid-area: graficos; }
+#reserva { grid-area: reserva; }
+@media (max-width: 768px) {
+  main { grid-template-columns: 1fr; grid-template-areas: "cardapio" "midia" "graficos" "reserva"; }
 }
+h2 { color: var(--cor-primaria-escura); margin-bottom: 0.75rem; }
 
-th, td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: left;
-}
+/* ===== Conteúdo (Aula 6) ===== */
+/* Erro 4 da Aula 6 evitado: nada de !important; IDs só no layout, classes no resto, e DevTools para ver regras riscadas */
+main a:link { color: var(--cor-primaria); }
+main a:visited { color: #6b3fa0; }
+main a:hover { text-decoration: none; }
+main a:active { color: var(--cor-acento); }
+.navbar a, .navbar a:visited { text-decoration: none; }
+.video-cardapio { display: block; width: 100%; max-width: 400px; border-radius: 8px; margin: 1rem 0; }
+small { color: var(--cor-texto-suave); }
+canvas { max-width: 100%; height: auto; display: block; margin-top: 0.75rem; }
 
-th {
-    background-color: #d35400;
-    color: white;
-}
+/* ===== Grade de cards responsiva (Aula 7) ===== */
+.grade-itens { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+.card-item { position: relative; background: var(--cor-card); border: 2px solid #eee; border-radius: var(--raio); padding: 1rem; transition: var(--transicao-padrao); }
+.card-item::before { content: "\2605"; position: absolute; top: 8px; right: 12px; color: var(--cor-acento); }
+.card-item:hover { transform: translateY(-4px); }
+.card-item h3 { padding-right: 1.5rem; font-size: 1.05rem; }
+.meta { color: var(--cor-texto-suave); font-size: 0.9rem; }
 
-img {
-    max-width: 100%;
-    border-radius: 8px;
-    margin: 15px 0;
-}
+/* ===== Classes ligadas pelo JavaScript (Aula 11) ===== */
+.pontuacao { margin-top: 0.5rem; font-size: 0.9rem; font-weight: 600; }
+.faixa-queridinho { border-color: #107c41; }
+.faixa-aprovado { border-color: var(--cor-primaria); }
+.faixa-regular { border-color: var(--cor-acento); }
+.faixa-rever { border-color: #c0392b; }
+.faixa-queridinho .pontuacao { color: #107c41; }
+.faixa-aprovado .pontuacao { color: var(--cor-primaria-escura); }
+.faixa-regular .pontuacao { color: #b45309; }
+.faixa-rever .pontuacao { color: #c0392b; }
+.intro-avaliacao { color: var(--cor-texto-suave); margin-bottom: 0.75rem; }
+.resumo-catalogo { background: var(--cor-acento-claro); border: 1px solid var(--cor-acento); border-radius: var(--raio); padding: 0.75rem 1rem; margin-bottom: 1rem; }
+.resumo-catalogo h3 { font-size: 1.05rem; }
+.resumo-catalogo ul { list-style: none; font-size: 0.9rem; }
 
-fieldset {
-    border: 2px solid #d35400;
-    border-radius: 8px;
-    padding: 15px;
-    margin-top: 20px;
-}
+/* ===== Formulário e rodapé ===== */
+fieldset { border: 2px solid var(--cor-primaria); border-radius: 8px; padding: 1rem; }
+legend { font-weight: bold; color: var(--cor-primaria); padding: 0 0.5rem; }
+input:focus-visible, select:focus-visible { outline: 3px solid var(--cor-acento); }
+button[type="submit"] { background: var(--cor-primaria); color: white; border: none; padding: 0.6rem 1.25rem; border-radius: 5px; cursor: pointer; }
+button[type="submit"]:hover, button[type="submit"]:focus-visible { background: var(--cor-primaria-escura); }
 
-legend {
-    font-weight: bold;
-    color: #d35400;
-}
-
-button {
-    background-color: #d35400;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-button:hover {
-    background-color: #a04000;
-}
-
-footer {
-    text-align: center;
-    margin-top: 30px;
-    padding-top: 15px;
-    border-top: 1px solid #ddd;
-    color: #777;
-}
-.foto-cardapio {
-    max-width: 400px;
-    width: 100%;
-    display: block;
-}
-
-.video-cardapio {
-    max-width: 400px;
-    width: 100%;
-    display: block;
-}
+/* ===== Abertura (hero) e acabamento visual ===== */
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+.hero { background: linear-gradient(135deg, #2b1608 0%, #5a2a0e 100%); color: #fff; padding: 3rem 1.5rem; }
+.hero-conteudo { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 2.5rem; align-items: center; min-height: 75vh; }
+.eyebrow { text-transform: uppercase; letter-spacing: 0.15em; font-size: 0.8rem; color: var(--cor-acento); }
+.hero h1 { font-size: clamp(2.5rem, 6vw, 4rem); line-height: 1.1; margin: 0.5rem 0 1rem; }
+.lead { font-size: 1.15rem; opacity: 0.9; max-width: 32rem; }
+.hero-botoes { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2rem; }
+.botao { padding: 0.8rem 1.6rem; border-radius: 999px; font-weight: 700; text-decoration: none; background: var(--cor-primaria); color: #fff; transition: var(--transicao-padrao); }
+.botao:hover, .botao:focus-visible { transform: translateY(-2px); background: var(--cor-primaria-escura); }
+.botao-sec { background: transparent; border: 2px solid #fff; }
+.hero img { width: 100%; max-width: 380px; justify-self: center; border-radius: 20px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4); }
+@media (max-width: 768px) { .hero-conteudo { grid-template-columns: 1fr; min-height: 0; } .hero img { max-height: 300px; object-fit: cover; } }
+main h2 { display: inline-block; border-bottom: 3px solid var(--cor-acento); padding-bottom: 0.15rem; margin-bottom: 1rem; }
+.card-item { box-shadow: var(--sombra); }
+.meta { text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.75rem; }
+footer { background: #2b1608; color: #e8d9cc; text-align: center; margin-top: 3rem; padding: 2rem 1rem; }
+footer a { color: var(--cor-acento); }
+footer small { color: inherit; }

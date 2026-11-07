@@ -1,0 +1,2 @@
+/* Reset: zera margens/paddings do navegador e aplica border-box em tudo (evita o Erro 2 da Aula 6) */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }

@@ -4,53 +4,112 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Burguer Pro</title>
+    <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/main.js" defer></script>
+    <script src="js/logica.js" defer></script>
+    <script src="js/catalogo.js" defer></script>
 </head>
 <body>
 
-    <header>
-        <h1>Burguer Pro</h1>
-        <p>Cardápio digital com os melhores lanches artesanais da cidade.</p>
+    <nav class="navbar" aria-label="Navegação principal">
+        <a href="#" class="logo">Burguer Pro</a>
+        <ul class="menu">
+            <li><a href="#" class="ativo">Início</a></li>
+            <li><a href="#cardapio">Cardápio</a></li>
+            <li class="tem-dropdown">
+                <a href="#cardapio">Categorias</a>
+                <ul class="dropdown">
+                    <li><a href="#cardapio">Lanches</a></li>
+                    <li><a href="#cardapio">Bebidas</a></li>
+                    <li><a href="#cardapio">Sobremesas</a></li>
+                </ul>
+            </li>
+            <li><a href="#reserva">Reservar</a></li>
+        </ul>
+        <button class="menu-hamburguer" aria-label="Abrir menu" aria-expanded="false">
+            <span class="barra"></span><span class="barra"></span><span class="barra"></span>
+        </button>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-conteudo">
+            <div>
+                <p class="eyebrow">Hamburgueria artesanal</p>
+                <h1>Burguer Pro</h1>
+                <p class="lead">Cardápio digital com os melhores lanches artesanais da cidade. Feito na chapa, servido na hora.</p>
+                <div class="hero-botoes">
+                    <a href="#cardapio" class="botao">Ver cardápio</a>
+                    <a href="#reserva" class="botao botao-sec">Reservar mesa</a>
+                </div>
+            </div>
+            <img src="assets/images/hamburguer.jpg" alt="Hambúrguer artesanal com queijo, alface e tomate">
+        </div>
     </header>
 
     <main>
-        <section>
-            <h2>Cardápio</h2>
-            <ul>
-                <li>Lanches</li>
-                <li>Bebidas</li>
-                <li>Sobremesas</li>
-            </ul>
+         <section id="cardapio">
+            <h2>Nosso cardápio</h2>
+            <p class="intro-avaliacao">Lanches, bebidas e sobremesas, com a nota que clientes e equipe deram a cada prato. A pontuação é a média das duas.</p>
+            <div class="grade-itens">
+                <article class="card-item" data-nome="X-Burguer Especial" data-categoria="Lanches" data-preco="25.9" data-nota-clientes="9.4" data-nota-equipe="9.0">
+                    <h3>X-Burguer Especial</h3>
+                    <p class="meta">Lanches · R$ 25,90</p>
+                    <p class="nota">Clientes: <strong>9.4</strong></p>
+                </article>
+                <article class="card-item" data-nome="Smash Duplo" data-categoria="Lanches" data-preco="29.9" data-nota-clientes="8.8" data-nota-equipe="8.2">
+                    <h3>Smash Duplo</h3>
+                    <p class="meta">Lanches · R$ 29,90</p>
+                    <p class="nota">Clientes: <strong>8.8</strong></p>
+                </article>
+                <article class="card-item" data-nome="Milkshake de Chocolate" data-categoria="Bebidas" data-preco="16" data-nota-clientes="8.6" data-nota-equipe="8.0">
+                    <h3>Milkshake de Chocolate</h3>
+                    <p class="meta">Bebidas · R$ 16,00</p>
+                    <p class="nota">Clientes: <strong>8.6</strong></p>
+                </article>
+                <article class="card-item" data-nome="Limonada da Casa" data-categoria="Bebidas" data-preco="8" data-nota-clientes="6.8" data-nota-equipe="6.2">
+                    <h3>Limonada da Casa</h3>
+                    <p class="meta">Bebidas · R$ 8,00</p>
+                    <p class="nota">Clientes: <strong>6.8</strong></p>
+                </article>
+                <article class="card-item" data-nome="Brownie com Sorvete" data-categoria="Sobremesas" data-preco="18" data-nota-clientes="7.4" data-nota-equipe="8.0">
+                    <h3>Brownie com Sorvete</h3>
+                    <p class="meta">Sobremesas · R$ 18,00</p>
+                    <p class="nota">Clientes: <strong>7.4</strong></p>
+                </article>
+            </div>
+        </section>
 
-            <table>
-                <tr>
-                    <th>Item</th>
-                    <th>Preço</th>
-                </tr>
-                <tr>
-                    <td>X-Burguer Especial</td>
-                    <td>R$ 25,90</td>
-                </tr>
-                <tr>
-                    <td>Batata Frita</td>
-                    <td>R$ 12,00</td>
-                </tr>
-            </table>
-
-            <a href="https://pt.wikipedia.org/wiki/Hamb%C3%BArguer" target="_blank" rel="noopener noreferrer">
-                Saiba mais sobre a história do hambúrguer
-            </a>
-
-            <img src="assets/images/hamburguer.jpg" alt="Hambúrguer artesanal com queijo, alface e tomate" class="foto-cardapio">
-
-            <h3>Nosso hambúrguer sendo preparado</h3>
-            <video controls class="video-cardapio">
-                <source src="assets/videos/video.mp4" type="video/mp4">
-                Seu navegador não suporta a reprodução de vídeo.
+        <section id="midia">
+            <h2>Nosso hambúrguer sendo preparado</h2>
+            <!-- preload="metadata": o vídeo está abaixo da dobra e pesa alguns MB. Essa dica pede só
+                 duração e dimensões (readyState HAVE_METADATA = 1) e não baixa o vídeo inteiro antes do play.
+                 É só uma dica: o navegador pode ignorá-la (ex.: economia de dados).
+                 Ordem dos <source>: WebM primeiro (2 MB, livre de royalties); MP4 (4,7 MB) fica de
+                 reserva por ser aceito em praticamente qualquer navegador. -->
+            <video controls class="video-cardapio" preload="metadata" poster="assets/images/poster-video.jpg">
+                <source src="assets/videos/video.webm" type='video/webm; codecs="vp9, opus"'>
+                <source src="assets/videos/video.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+                <track kind="captions" src="assets/videos/legendas-pt.vtt" srclang="pt" label="Português" default>
+                <p>Seu navegador não suporta vídeo HTML5. <a href="assets/videos/video.mp4">Baixe o vídeo</a>.</p>
             </video>
         </section>
 
-        <section>
+        <section id="graficos">
+            <h2>Mais pedidos da semana</h2>
+            <svg viewBox="0 0 140 60" width="140" height="60" role="img" aria-labelledby="titulo-selo">
+                <title id="titulo-selo">Selo: Mais Vendido</title>
+                <rect x="2" y="2" width="136" height="56" rx="10" fill="#a04000" />
+                <polygon points="50,5 61,35 95,35 68,55 79,90 50,70 21,90 32,55 5,35 39,35" fill="#f39c12" transform="translate(10,10) scale(0.4)" />
+                <text x="52" y="35" font-size="12" font-weight="bold" fill="#ffffff">MAIS VENDIDO</text>
+            </svg>
+            <canvas id="grafico-pedidos" width="360" height="220" role="img"
+                    aria-label="Gráfico de pedidos da semana por categoria: Lanches, Bebidas e Sobremesas">
+                <p>Pedidos da semana: Lanches 120, Bebidas 85, Sobremesas 40.</p>
+            </canvas>
+        </section>
+
+        <section id="reserva">
             <h2>Reserve sua mesa</h2>
             <form>
                 <fieldset>
@@ -97,6 +156,7 @@
 
     <footer>
         <p>&copy; 2026 Burguer Pro. Todos os direitos reservados.</p>
+        <p><small><a href="https://pt.wikipedia.org/wiki/Hamb%C3%BArguer" target="_blank" rel="noopener noreferrer">Curiosidade: a história do hambúrguer</a></small></p>
     </footer>
 
 </body>
